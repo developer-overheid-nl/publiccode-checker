@@ -1,10 +1,9 @@
 import { json, jsonParseLinter } from '@codemirror/lang-json';
-import { Diagnostic, forEachDiagnostic, linter, lintGutter, setDiagnosticsEffect } from '@codemirror/lint';
+import { forEachDiagnostic, linter, lintGutter, setDiagnosticsEffect } from '@codemirror/lint';
 import ReactCodeMirror, { EditorSelection, Extension, ReactCodeMirrorRef } from '@uiw/react-codemirror';
 import clsx from 'clsx';
-import { isEmpty } from 'ramda';
 import { FC, useEffect, useRef, useState } from 'react';
-import { Spec, SpecInput, SpecLinter } from '../types';
+import { Diagnostic, Spec, SpecInput, SpecLinter } from '../types';
 import { formatDocument, groupBySource, handleResponse } from '../util';
 
 const EXTENSIONS: Extension[] = [json(), linter(jsonParseLinter()), lintGutter()];
@@ -85,13 +84,14 @@ const CodeEditor: FC<Props> = ({ spec, uri }) => {
       <div className="flex-1 overflow-auto p-4 bg-sky-100 text-sm">
         {checking && <p>Checking...</p>}
         {!checking && error && <div className="mb-4 p-4 bg-red-500 text-white rounded-sm shadow-lg">{error}</div>}
-        {!checking && !error && isEmpty(linters) && <p>No matching rulesets found.</p>}
         {!checking &&
           !error &&
           linters.map(linter => (
             <div key={linter.name}>
               {!diagnostics[linter.name] ? (
-                <div className="mb-4 p-4 bg-green-600 text-white rounded-sm shadow-lg">[{linter.name}] No violations found.</div>
+                <div className="mb-4 p-4 bg-green-600 text-white rounded-sm shadow-lg">
+                  [{linter.name}] No violations found.
+                </div>
               ) : (
                 <>
                   <div className="mb-4 p-4 bg-red-500 text-white rounded-sm shadow-lg">
@@ -119,9 +119,19 @@ const CodeEditor: FC<Props> = ({ spec, uri }) => {
                                 })
                               }
                             >
-                              (show)
+                              (show in editor)
                             </a>
                           </span>
+                          {diagnostic.documentationUrl && (
+                            <>
+                              &nbsp;
+                              <span className="text-blue-600 underline">
+                                <a href={diagnostic.documentationUrl} target="_blank" rel="noopener noreferrer">
+                                  (how to fix)
+                                </a>
+                              </span>
+                            </>
+                          )}
                         </div>
                       </li>
                     ))}

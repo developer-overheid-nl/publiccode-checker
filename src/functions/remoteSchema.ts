@@ -2,6 +2,8 @@ import betterAjvErrors from '@stoplight/better-ajv-errors';
 import { IFunctionResult, RulesetFunction } from '@stoplight/spectral-core';
 import addFormats from 'ajv-formats';
 import Ajv, { AnySchemaObject } from 'ajv/dist/2020';
+import draft7MetaSchema from 'ajv/dist/refs/json-schema-draft-07.json';
+
 
 interface Options {
   schema: AnySchemaObject | SchemaFunction;
@@ -21,6 +23,7 @@ const ajv = new Ajv({
   },
 });
 
+ajv.addMetaSchema(draft7MetaSchema);
 addFormats(ajv);
 
 export const remoteSchema: RulesetFunction<unknown, Options> = async (input, options, context) => {

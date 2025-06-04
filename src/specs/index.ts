@@ -1,4 +1,3 @@
-import { jsonFgSpec } from './json-fg/spec';
-import { ogcApiFeaturesSpec, ogcApiRecordsSpec } from './ogc-api/spec';
+import publiccodeSpec from './publiccode/spec';
 
-export default [jsonFgSpec, ogcApiFeaturesSpec, ogcApiRecordsSpec];
+export default [publiccodeSpec];

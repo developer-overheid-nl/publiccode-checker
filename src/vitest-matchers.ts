@@ -4,11 +4,9 @@ import { expect } from 'vitest';
 expect.extend({
   toContainViolation(violations: ISpectralDiagnostic[], code: string, count: number = 1, message?: string | RegExp) {
     expect(Array.isArray(violations)).toBe(true);
+    expect(violations).length(count);
 
-    const matches = violations.filter(violation => violation.code === code);
-    expect(matches).length(count);
-
-    matches.forEach(violation => {
+    violations.forEach(violation => {
       expect(violation).toMatchObject({ code });
 
       if (message) {

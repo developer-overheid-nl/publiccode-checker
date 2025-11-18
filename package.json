@@ -11,9 +11,11 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@codemirror/lang-json": "^6.0.1",
+    "@codemirror/lang-json": "^6.0.2",
+    "@codemirror/lang-yaml": "^6.1.2",
     "@codemirror/language": "^6.11.0",
     "@codemirror/lint": "^6.8.5",
+    "@modyfi/vite-plugin-yaml": "^1.1.1",
     "@stoplight/better-ajv-errors": "^1.0.3",
     "@stoplight/spectral-core": "^1.20.0",
     "@stoplight/spectral-formats": "^1.8.2",

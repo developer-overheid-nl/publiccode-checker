@@ -1,12 +1,13 @@
-import { json, jsonParseLinter } from '@codemirror/lang-json';
-import { forEachDiagnostic, linter, lintGutter, setDiagnosticsEffect } from '@codemirror/lint';
+// import { json, jsonParseLinter } from '@codemirror/lang-json';
+import { yaml } from '@codemirror/lang-yaml';
+// import { forEachDiagnostic, linter, lintGutter, setDiagnosticsEffect } from '@codemirror/lint';
 import ReactCodeMirror, { EditorSelection, Extension, ReactCodeMirrorRef } from '@uiw/react-codemirror';
 import clsx from 'clsx';
 import { FC, useEffect, useRef, useState } from 'react';
 import { Diagnostic, Spec, SpecInput, SpecLinter } from '../types';
 import { formatDocument, groupBySource, handleResponse } from '../util';
 
-const EXTENSIONS: Extension[] = [json(), linter(jsonParseLinter()), lintGutter()];
+const EXTENSIONS: Extension[] = [yaml()];
 
 interface Props {
   spec: Spec;
@@ -55,30 +56,31 @@ const CodeEditor: FC<Props> = ({ spec, uri }) => {
     <div className="flex h-full">
       <div className="w-[50%] min-w-[400px] overflow-auto">
         <ReactCodeMirror
+          theme={'dark'}
           ref={codeMirrorRef}
           value={content}
           extensions={[...EXTENSIONS, ...linters.map(l => l.linter)]}
-          onUpdate={viewUpdate => {
-            if (error) {
-              return;
-            }
+          // onUpdate={viewUpdate => {
+          //   if (error) {
+          //     return;
+          //   }
 
-            viewUpdate.transactions.forEach(transaction => {
-              transaction.effects.forEach(effect => {
-                if (effect.is(setDiagnosticsEffect)) {
-                  const diagnostics: Diagnostic[] = [];
-                  forEachDiagnostic(viewUpdate.state, d => diagnostics.push(d));
-                  setDiagnostics(groupBySource(diagnostics));
-                  setChecking(false);
-                }
-              });
-            });
+          //   viewUpdate.transactions.forEach(transaction => {
+          //     transaction.effects.forEach(effect => {
+          //       if (effect.is(setDiagnosticsEffect)) {
+          //         const diagnostics: Diagnostic[] = [];
+          //         forEachDiagnostic(viewUpdate.state, d => diagnostics.push(d));
+          //         setDiagnostics(groupBySource(diagnostics));
+          //         setChecking(false);
+          //       }
+          //     });
+          //   });
 
-            if (viewUpdate.docChanged) {
-              setContent(viewUpdate.state.doc.toString());
-              setChecking(true);
-            }
-          }}
+          //   if (viewUpdate.docChanged) {
+          //     setContent(viewUpdate.state.doc.toString());
+          //     setChecking(true);
+          //   }
+          // }}
         />
       </div>
       <div className="flex-1 overflow-auto p-4 bg-sky-100 text-sm">

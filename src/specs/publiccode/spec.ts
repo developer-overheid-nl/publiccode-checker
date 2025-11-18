@@ -2,7 +2,7 @@ import { APPLICATION_JSON_TYPE, APPLICATION_OPENAPI_JSON_3_0_TYPE } from '../../
 import { spectralLinter } from '../../spectral';
 import { Spec, SpecLinter, SpecResponseMapper } from '../../types';
 import { handleResponse, handleResponseJson } from '../../util';
-import example from './example.json';
+import example from './publiccode_example.yml';
 import rulesets from './rulesets';
 
 const responseMapper: SpecResponseMapper = async responseText => {

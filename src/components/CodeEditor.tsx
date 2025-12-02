@@ -1,13 +1,13 @@
-// import { json, jsonParseLinter } from '@codemirror/lang-json';
+import { json, jsonParseLinter } from '@codemirror/lang-json';
 import { yaml } from '@codemirror/lang-yaml';
-// import { forEachDiagnostic, linter, lintGutter, setDiagnosticsEffect } from '@codemirror/lint';
+import { forEachDiagnostic, linter, lintGutter, setDiagnosticsEffect } from '@codemirror/lint';
 import ReactCodeMirror, { EditorSelection, Extension, ReactCodeMirrorRef } from '@uiw/react-codemirror';
 import clsx from 'clsx';
 import { FC, useEffect, useRef, useState } from 'react';
 import { Diagnostic, Spec, SpecInput, SpecLinter } from '../types';
 import { formatDocument, groupBySource, handleResponse } from '../util';
 
-const EXTENSIONS: Extension[] = [yaml()];
+const EXTENSIONS: Extension[] = [json(), yaml(), linter(jsonParseLinter()), lintGutter()];
 
 interface Props {
   spec: Spec;
@@ -60,27 +60,31 @@ const CodeEditor: FC<Props> = ({ spec, uri }) => {
           ref={codeMirrorRef}
           value={content}
           extensions={[...EXTENSIONS, ...linters.map(l => l.linter)]}
-          // onUpdate={viewUpdate => {
-          //   if (error) {
-          //     return;
-          //   }
+          onUpdate={viewUpdate => {
+            if (error) {
+              return;
+            }
 
-          //   viewUpdate.transactions.forEach(transaction => {
-          //     transaction.effects.forEach(effect => {
-          //       if (effect.is(setDiagnosticsEffect)) {
-          //         const diagnostics: Diagnostic[] = [];
-          //         forEachDiagnostic(viewUpdate.state, d => diagnostics.push(d));
-          //         setDiagnostics(groupBySource(diagnostics));
-          //         setChecking(false);
-          //       }
-          //     });
-          //   });
+            viewUpdate.transactions.forEach(transaction => {
+              console.log(';hurray');
+              
+              transaction.effects.forEach(effect => {
+                if (effect.is(setDiagnosticsEffect)) {
+                  const diagnostics: Diagnostic[] = [];
+                  forEachDiagnostic(viewUpdate.state, d => diagnostics.push(d));
+                  console.log(diagnostics);
+                  
+                  setDiagnostics(groupBySource(diagnostics));
+                  setChecking(false);
+                }
+              });
+            });
 
-          //   if (viewUpdate.docChanged) {
-          //     setContent(viewUpdate.state.doc.toString());
-          //     setChecking(true);
-          //   }
-          // }}
+            if (viewUpdate.docChanged) {
+              setContent(viewUpdate.state.doc.toString());
+              setChecking(true);
+            }
+          }}
         />
       </div>
       <div className="flex-1 overflow-auto p-4 bg-sky-100 text-sm">
@@ -128,7 +132,10 @@ const CodeEditor: FC<Props> = ({ spec, uri }) => {
                             <>
                               &nbsp;
                               <span className="text-blue-600 underline">
-                                <a href={diagnostic.documentationUrl} target="_blank" rel="noopener noreferrer">
+                                <a onClick={() => {
+                                  console.log(diagnostic);
+                                } 
+                              } target="_blank" rel="noopener noreferrer">
                                   (how to fix)
                                 </a>
                               </span>

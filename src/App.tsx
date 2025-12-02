@@ -21,7 +21,7 @@ const App: FC<Props> = ({ spec }) => {
             <Link to="/">Publiccode Checker</Link>: {spec.name}
           </h1>
         </div>
-        <UriInput onSubmit={setUri} />
+        {/* <UriInput onSubmit={setUri} /> */}
         <div className="flex items-center">
           <SpecSelector className="mr-4" />
           <a href="https://github.com/developer-overheid-nl/publiccode-checker" target="_blank">

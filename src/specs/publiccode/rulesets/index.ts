@@ -1,8 +1,8 @@
 import { Rulesets } from '../../../spectral';
-import publiccode, { PUBLICCODE_URI } from './publiccode';
+import publiccode, { PUBLICCODE_GIT_URI } from './publiccode';
 
 const rulesets: Rulesets = {
-  [PUBLICCODE_URI]: publiccode,
+  [PUBLICCODE_GIT_URI]: publiccode,
 };
 
 export default rulesets;

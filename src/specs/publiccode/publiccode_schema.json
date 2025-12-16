@@ -213,10 +213,10 @@
       }
     },
     "platforms": {
-      "description": "This key specifies which platform the software runs on. It is meant to describe the platforms that users will use to access and operate the software, rather than the platform the software itself runs on.\n\nUse the predefined values if possible. If the software runs on a platform for which a predefined value is not available, a different value can be used.",
-      "type": "array",
-      "items": {
-        "type": "string"
+      "description": "This key specifies which platform the software runs on. It is meant to describe the platforms that users will use to access and operate the software, rather than the platform the software itself runs on.",
+      "type":"array",
+      "items":{
+        "enum": ["web", "windows", "mac", "linux", "ios", "android"]
       }
     },
     "categories": {

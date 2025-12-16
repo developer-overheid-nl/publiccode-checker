@@ -104,7 +104,9 @@ export const formatDocument = (content: string): string => {
   try {
     const doc = JSON.parse(content);
     return JSON.stringify(doc, undefined, 2);
-  } catch {
+  } catch (error) {
+    console.log(error);
+    
     throw new Error('JSON document could not be parsed.');
   }
 };

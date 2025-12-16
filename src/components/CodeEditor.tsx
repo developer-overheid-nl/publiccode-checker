@@ -6,6 +6,7 @@ import clsx from 'clsx';
 import { FC, useEffect, useRef, useState } from 'react';
 import { Diagnostic, Spec, SpecInput, SpecLinter } from '../types';
 import { formatDocument, groupBySource, handleResponse } from '../util';
+import { Yaml } from '@stoplight/spectral-parsers';
 
 const EXTENSIONS: Extension[] = [json(), yaml(), linter(jsonParseLinter()), lintGutter()];
 
@@ -35,10 +36,21 @@ const CodeEditor: FC<Props> = ({ spec, uri }) => {
 
       fetch(uri)
         .then(response => handleResponse(response, uri))
-        .then(responseText =>
+        .then(responseText => {
+
+          // Parse YAML to JSON
+          const parsed = Yaml.parse(responseText);
+
+          // Convert to formatted JSON string
+          const jsonString = JSON.stringify(parsed.data, null, 2);
+
+          console.log(responseText);
+          return jsonString
+        })
+        .then(jsonString =>
           spec.responseMapper //
-            ? spec.responseMapper(responseText)
-            : Promise.resolve({ content: responseText })
+            ? spec.responseMapper(jsonString)
+            : Promise.resolve({ content: jsonString })
         )
         .then((input: SpecInput) => {
           setChecking(false);

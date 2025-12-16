@@ -44,6 +44,9 @@ export const remoteSchema: RulesetFunction<unknown, Options> = async (input, opt
   }
 
   return ajv.compileAsync(schema).then(validate => {
+
+    console.log(schema);
+    
     validate(input);
 
     if (validate.errors) {

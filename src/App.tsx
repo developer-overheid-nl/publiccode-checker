@@ -13,8 +13,12 @@ interface Props {
 const App: FC<Props> = ({ spec }) => {
   const [uri, setUri] = useState('');
 
+  const appStyle = {
+    background: "#f2f4f6"
+  }
+
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen" style={appStyle}>
       <header className="flex justify-between items-center px-4 py-2 bg-slate-700 text-white">
         <div>
           <h1 className="text-lg font-medium">

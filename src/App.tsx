@@ -13,16 +13,21 @@ interface Props {
 const App: FC<Props> = ({ spec }) => {
   const [uri, setUri] = useState('');
 
+  const headerStyle = {
+    color: 'white',
+    background: "#154273"
+  };
+
   const appStyle = {
-    background: "#f2f4f6"
+    background: "#e2e8f0"
   }
 
   return (
     <div className="flex flex-col h-screen" style={appStyle}>
-      <header className="flex justify-between items-center px-4 py-2 bg-slate-700 text-white">
+      <header className="flex justify-between items-center px-4 py-2 text-white" style={headerStyle}>
         <div>
           <h1 className="text-lg font-medium">
-            <Link to="/">Publiccode Checker</Link>: {spec.name}
+            <Link to="/">Publiccode Checker</Link>: <a href="">{spec.name}</a>
           </h1>
         </div>
         <UriInput onSubmit={setUri} />

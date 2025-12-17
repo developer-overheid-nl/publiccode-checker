@@ -22,12 +22,16 @@ const App: FC<Props> = ({ spec }) => {
     background: "#e2e8f0"
   }
 
+  const jsonSchemaUrlStyle = {
+    textDecoration: "underline"
+  }
+
   return (
     <div className="flex flex-col h-screen" style={appStyle}>
       <header className="flex justify-between items-center px-4 py-2 text-white" style={headerStyle}>
         <div>
           <h1 className="text-lg font-medium">
-            <Link to="/">Publiccode Checker</Link>: <a href="">{spec.name}</a>
+            <Link to="/">Publiccode Checker</Link>: <Link to={ spec.externalUrl } style={jsonSchemaUrlStyle}>{spec.name}</Link>
           </h1>
         </div>
         <UriInput onSubmit={setUri} />

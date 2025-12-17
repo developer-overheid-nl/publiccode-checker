@@ -95,7 +95,7 @@ const CodeEditor: FC<Props> = ({ spec, uri }) => {
           }}
         />
       </div>
-      <div className="flex-1 overflow-auto p-4 bg-sky-100 text-sm">
+      <div className="flex-1 overflow-auto p-4 text-sm">
         {checking && <p>Checking...</p>}
         {!checking && error && <div className="mb-4 p-4 bg-red-500 text-white rounded-sm shadow-lg">{error}</div>}
         {!checking &&

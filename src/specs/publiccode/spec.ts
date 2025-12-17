@@ -59,7 +59,8 @@ const responseMapper: SpecResponseMapper = async responseText => {
 const linterName = (confClass: string) => confClass.replace('http://www.opengis.net/spec/', '');
 
 const spec: Spec = {
-  name: 'Publiccode',
+  name: 'Publiccode JSON Schema, Developer Italia',
+  externalUrl: "https://raw.githubusercontent.com/teamdigitale/publiccode-json-schema/refs/heads/main/data/publiccode-schema/publiccode_schema_v0.5.7.json",
   slug: 'pc',
   example: JSON.stringify(example, undefined, 2),
   linters: Object.entries(rulesets).map(entry => ({

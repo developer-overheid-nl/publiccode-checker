@@ -3,6 +3,7 @@ import { Diagnostic as CodemirrorDiagnostic } from '@codemirror/lint';
 
 export interface Spec {
   name: string;
+  externalUrl: string;
   slug: string;
   example: string;
   linters: SpecLinter[];

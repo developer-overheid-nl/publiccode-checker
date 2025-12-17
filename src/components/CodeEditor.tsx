@@ -77,15 +77,11 @@ const CodeEditor: FC<Props> = ({ spec, uri }) => {
               return;
             }
 
-            viewUpdate.transactions.forEach(transaction => {
-              console.log(';hurray');
-              
+            viewUpdate.transactions.forEach(transaction => {    
               transaction.effects.forEach(effect => {
                 if (effect.is(setDiagnosticsEffect)) {
                   const diagnostics: Diagnostic[] = [];
                   forEachDiagnostic(viewUpdate.state, d => diagnostics.push(d));
-                  console.log(diagnostics);
-                  
                   setDiagnostics(groupBySource(diagnostics));
                   setChecking(false);
                 }

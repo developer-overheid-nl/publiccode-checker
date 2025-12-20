@@ -8,7 +8,7 @@ import { Diagnostic, Spec, SpecInput, SpecLinter } from '../types';
 import { formatDocument, groupBySource, handleResponse } from '../util';
 import { Yaml } from '@stoplight/spectral-parsers';
 
-const EXTENSIONS: Extension[] = [json(), yaml(), linter(jsonParseLinter()), lintGutter()];
+const EXTENSIONS: Extension[] = [yaml(), lintGutter()];
 
 interface Props {
   spec: Spec;
@@ -28,41 +28,41 @@ const CodeEditor: FC<Props> = ({ spec, uri }) => {
     setLinters(spec.linters);
   }, [spec]);
 
-  useEffect(() => {
-    if (uri) {
-      setError(undefined);
-      setChecking(true);
-      setDiagnostics({});
+  // useEffect(() => {
+  //   if (uri) {
+  //     setError(undefined);
+  //     setChecking(true);
+  //     setDiagnostics({});
 
-      fetch(uri)
-        .then(response => handleResponse(response, uri))
-        .then(responseText => {
+  //     fetch(uri)
+  //       .then(response => handleResponse(response, uri))
+  //       .then(responseText => {
 
-          // Parse YAML to JSON
-          const parsed = Yaml.parse(responseText);
+  //         // Parse YAML to JSON
+  //         const parsed = Yaml.parse(responseText);
 
-          // Convert to formatted JSON string
-          const jsonString = JSON.stringify(parsed.data, null, 2);
+  //         // Convert to formatted JSON string
+  //         const jsonString = JSON.stringify(parsed.data, null, 2);
 
-          console.log(responseText);
-          return jsonString
-        })
-        .then(jsonString =>
-          spec.responseMapper //
-            ? spec.responseMapper(jsonString)
-            : Promise.resolve({ content: jsonString })
-        )
-        .then((input: SpecInput) => {
-          setChecking(false);
-          setContent(formatDocument(input.content));
-          setLinters(input.linters ?? spec.linters);
-        })
-        .catch(error => {
-          setChecking(false);
-          setError(error.message);
-        });
-    }
-  }, [uri, spec]);
+  //         console.log(responseText);
+  //         return jsonString
+  //       })
+  //       .then(jsonString =>
+  //         spec.responseMapper //
+  //           ? spec.responseMapper(jsonString)
+  //           : Promise.resolve({ content: jsonString })
+  //       )
+  //       .then((input: SpecInput) => {
+  //         setChecking(false);
+  //         setContent(formatDocument(input.content));
+  //         setLinters(input.linters ?? spec.linters);
+  //       })
+  //       .catch(error => {
+  //         setChecking(false);
+  //         setError(error.message);
+  //       });
+  //   }
+  // }, [uri, spec]);
 
   return (
     <div className="flex h-full">
@@ -73,13 +73,9 @@ const CodeEditor: FC<Props> = ({ spec, uri }) => {
           value={content}
           extensions={[...EXTENSIONS, ...linters.map(l => l.linter)]}
           onUpdate={viewUpdate => {
-            if (error) {
-              return;
-            }
-
+            console.log('update');
+            
             viewUpdate.transactions.forEach(transaction => {
-              console.log(';hurray');
-              
               transaction.effects.forEach(effect => {
                 if (effect.is(setDiagnosticsEffect)) {
                   const diagnostics: Diagnostic[] = [];

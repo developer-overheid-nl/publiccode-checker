@@ -2,7 +2,7 @@ import { APPLICATION_JSON_TYPE, APPLICATION_OPENAPI_JSON_3_0_TYPE } from '../../
 import { spectralLinter } from '../../spectral';
 import { Spec, SpecLinter, SpecResponseMapper } from '../../types';
 import { handleResponse, handleResponseJson } from '../../util';
-import example from './publiccode_example.yml';
+import example from './publiccode_example_yml.yml?raw';
 import rulesets from './rulesets';
 
 const responseMapper: SpecResponseMapper = async responseText => {
@@ -58,10 +58,14 @@ const responseMapper: SpecResponseMapper = async responseText => {
 
 const linterName = (confClass: string) => confClass.replace('http://www.opengis.net/spec/', '');
 
+console.log('yml?');
+
+console.log(example);
+
 const spec: Spec = {
   name: 'Publiccode',
   slug: 'pc',
-  example: JSON.stringify(example, undefined, 2),
+  example: example,
   linters: Object.entries(rulesets).map(entry => ({
     name: linterName(entry[0]),
     linter: spectralLinter(linterName(entry[0]), entry[1]),

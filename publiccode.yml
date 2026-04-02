@@ -1,0 +1,51 @@
+publiccodeYmlVersion: "0.5"
+
+name: Publiccode Checker
+url: https://github.com/developer-overheid-nl/publiccode-checker
+landingURL: https://developer-overheid-nl.github.io/publiccode-checker/
+softwareType: standalone/web
+developmentStatus: stable
+
+categories:
+  - it-development
+
+description:
+
+  nl:
+
+    shortDescription: >-
+      Checker voor validatie en linting van publiccode.yml-bestanden voor
+      open source overheidssoftware.
+
+    longDescription: |
+      Publiccode Checker is een web-based validatie- en lintingtool voor
+      publiccode.yml-bestanden. Deze bestanden worden gebruikt om open
+      source softwareprojecten van overheden te beschrijven en vindbaar
+      te maken in catalogi zoals developer.overheid.nl.
+
+      De tool stelt ontwikkelaars in staat om hun publiccode.yml direct
+      in de browser te valideren en eventuele fouten of verbeterpunten
+      te identificeren.
+
+localisation:
+  localisationReady: false
+  availableLanguages:
+  - nl
+
+intendedAudience:
+
+  countries:
+    - NL
+
+legal:
+
+  license: MIT
+  mainCopyrightOwner: Geonovum
+
+maintenance:
+
+  type: internal
+  contacts:
+    - name: developer.overheid.nl
+      email: developer.overheid@geonovum.nl
+      affiliation: Geonovum

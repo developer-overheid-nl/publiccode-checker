@@ -19,7 +19,13 @@ const App: FC<Props> = ({ spec }) => {
 
   return (
     <div className="flex flex-col h-screen" style={appStyle}>
-      <header className="flex justify-between items-center px-4 py-2 bg-slate-700 text-white">
+
+      <div className='mt-32 w-4xl mx-auto'>
+        <p className='text-xl mb-2'>The publiccode-checker has been replaced by the developer.overheid.nl general checker:</p>
+        <a className='text-2xl text-blue-800 font-bold' href="https://developer-overheid-nl.github.io/don-checker/#/publiccode-05">developer-overheid-nl.github.io/don-checker</a>
+      </div>
+
+      {/* <header className="flex justify-between items-center px-4 py-2 bg-slate-700 text-white">
         <div>
           <h1 className="text-lg font-medium">
             <Link to="/">Publiccode Checker</Link>: {spec.name}
@@ -35,7 +41,7 @@ const App: FC<Props> = ({ spec }) => {
       </header>
       <div className="flex-1 overflow-hidden">
         <CodeEditor spec={spec} uri={uri !== '' ? uri : undefined} />
-      </div>
+      </div> */}
     </div>
   );
 };

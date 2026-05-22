@@ -4,7 +4,7 @@ name: Publiccode Checker
 url: https://github.com/developer-overheid-nl/publiccode-checker
 landingURL: https://developer-overheid-nl.github.io/publiccode-checker/
 softwareType: standalone/web
-developmentStatus: stable
+developmentStatus: obsolete
 
 categories:
   - it-development

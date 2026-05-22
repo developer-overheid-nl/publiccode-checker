@@ -1,5 +1,7 @@
 # Publiccode Checker
 
+> **Warning: This repository is obsolete.** publiccode.yml validation is now supported by the [DON Checker](https://developer-overheid-nl.github.io/don-checker/). Please use that tool instead.
+
 This repository contains a checker (validation & linting) for the [Publiccode.ymnl].
 
 URL: https://developer-overheid-nl.github.io/publiccode-checker/
